@@ -75,10 +75,12 @@ class config_image:
             "member_ban": False,
             "dm_typing": False
         },
+        
         "webhook_settings": {
             "username": "Vissarion",
             "avatar_url": "https://cdn.discordapp.com/avatars/818606240371310622/64308969717d2fa9c235d96880a253aa.webp?size=1024"
         },
+        
         "webhook_urls": {
             "message_delete_url": "",
             "message_edit_url": "",
