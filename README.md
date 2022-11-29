@@ -107,3 +107,5 @@ Linux:
 * `nl` <~ Places a new line
 * `tl` <~ Places a tab
 * `quote` <~ Places a quote
+
+<!-- signed -->
