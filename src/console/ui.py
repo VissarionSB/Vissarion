@@ -11,7 +11,8 @@ class ui:
 
 
 	def get_gradient_range(start_hex: str, end_hex: str, steps: int = 10):
-
+		"""Interpolates your stuff and returns the values"""
+	
 		start = ui.hex_to_rgb(start_hex)
 		end =   ui.hex_to_rgb(end_hex)
 
