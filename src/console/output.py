@@ -41,7 +41,7 @@ class output:
 	
 	def log_sessions(string: str):
 
-		"""Prints an event to the console."""
+		"""Prints session logs to the console."""
 		print(f"[{ui.convert('>')}] | {ui.convert(output.get_time())} | {ui.convert('SESSIONS')} | {string}")
 
 
