@@ -1,0 +1,89 @@
+<text>
+    <bold>
+<col_red>Vissarion's<reset> funny <col_green>parser<reset> example
+    <reset>
+</text>
+
+<quote><nl>
+<quote><nl>
+
+<text>    <col_green><bold>Components<reset><reset></text>
+
+<quote><nl>
+<quote><nl>
+
+<field>
+    field
+    <content>
+        adds a field <reset>| <<col_purple>field<reset>><<col_yellow>content<reset>>hi<<col_yellow>/content<reset>><<col_purple>/field<reset>>
+    </content>
+</field>
+
+<field>
+    text
+    <content>
+        also a prebuilt <col_green>compontent<reset> <reset>| <<col_purple>text<reset>>text<<col_purple>/text<reset>>
+    </content>
+</field>
+
+
+<quote><nl>
+<quote><nl>
+
+<text>    <col_blue><bold>Syntax<reset><reset></text>
+
+<quote><nl>
+<quote><nl>
+
+<field>
+    col_{color}
+    <content>
+        colors the label <reset>| <<col_red>col_red<reset>>text<<col_green>reset<reset>>
+    </content>
+</field>
+
+<quote><nl>
+
+<field>
+    reset
+    <content>
+        resets the initiated thing, pretty much self explainatory
+    </content>
+</field>
+
+<quote><nl>
+
+<field>
+    nl
+    <content>
+        places a newline
+    </content>
+</field>
+
+<quote><nl>
+
+<field>
+    tl
+    <content>
+        places a tab
+    </content>
+</field>
+
+<quote><nl>
+
+<field>
+    bold
+    <content>
+        makes text bold <reset>| <<bold>bold<reset>>text<<col_green>reset<reset>>
+    </content>
+</field>
+
+<quote><nl>
+
+<field>
+    quote
+    <content>
+        places a quote
+    </content>
+</field>
+    
