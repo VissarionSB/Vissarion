@@ -11,7 +11,9 @@ class Fun(commands.Cog):
 	def __init__(self, bot):
 		self.bot = bot
 		self.clowns = []
+		self.mocking = []
 		self.cycling_nickname = False
+	
 
 
 	@commands.command(name="clown", aliases=["clownify"], description="Automatically adds a clown emoji to the user's messages", usage="clown <user>")
@@ -26,7 +28,6 @@ class Fun(commands.Cog):
 
 		output.log("Added " + user.name + " to the clown list")
 
-
 	@commands.command(name="unclown", aliases=["unclownify"], description="Removes the user from the clown list", usage="unclown <user>")
 	async def unclown(self, ctx, user: discord.Member):
 
@@ -36,6 +37,89 @@ class Fun(commands.Cog):
 		else:
 			output.error("User is not in the clowns list")
 	
+	
+	@commands.command(name="mock", aliases=[], description="Automatically responds to a user's message with a mocked version", usage="mock <user>")
+	async def mock(self, ctx, user: discord.Member):
+		if user in self.mocking:
+			output.error("User is already being mocked")
+			return
+
+		self.mocking.append(user)
+
+		output.log("Started mocking " + user.name)
+
+	@commands.command(name="unmock", aliases=[], description="Stops mocking a user", usage="unmock <user>")
+	async def unmock(self, ctx, user: discord.Member):
+
+		if user in self.mocking:
+			self.mocking.remove(user)
+			output.log("Stopped mocking " + user.name)
+		else:
+			output.error("User is not being mocked")
+
+
+
+	@commands.command(name="minesweeper", aliases=["mines"], description="Generates a minesweeper board", usage="minesweeper <width> <height> <mines>")
+	async def minesweeper(self, ctx, width: int = 5, height: int = 5, mines: int = 4):
+		
+		if width > 10 or height > 10:
+			output.error("Width and height cannot be greater than 10")
+			return
+
+		if mines > width * height:
+			output.error("The amount of mines cannot be greater than the amount of tiles")
+			return
+
+		board = []
+
+		for x in range(width):
+			board.append([])
+			for y in range(height):
+				board[x].append("||:white_large_square:||")
+
+		for x in range(mines):
+			while True:
+				x = random.randint(0, width - 1)
+				y = random.randint(0, height - 1)
+				if board[x][y] != "||:bomb:||":
+					board[x][y] = "||:bomb:||"
+					break
+
+		for x in range(width):
+			for y in range(height):
+				if board[x][y] != "||:bomb:||":
+					adjacent_mines = 0
+					for x2 in range(-1, 2):
+						for y2 in range(-1, 2):
+							if x + x2 >= 0 and x + x2 < width and y + y2 >= 0 and y + y2 < height:
+								if board[x + x2][y + y2] == "||:bomb:||":
+									adjacent_mines += 1
+					if adjacent_mines != 0:
+						adjacent_mines = {
+							1: "one",
+							2: "two",
+							3: "three",
+							4: "four",
+							5: "five",
+							6: "six",
+							7: "seven",
+							8: "eight"
+						}[adjacent_mines]
+
+						board[x][y] = f"||:{adjacent_mines}:||"
+
+		board_string = ""
+
+		for x in range(width):
+			for y in range(height):
+				board_string += board[x][y]
+			board_string += "\n"
+	
+		await ctx.send(board_string)
+
+
+
+
 
 	@commands.command(name="animatenick", aliases=["cyclenick", "nickanimate"], description="Animates your nickname", usage="animatenick <nickname>")
 	async def animatenick(self, ctx, nickname: str):
@@ -53,7 +137,7 @@ class Fun(commands.Cog):
 				await ctx.message.author.edit(nick=name)
 				await asyncio.sleep(0.2)
 	
-
+ 
 	@commands.command(name="stopanimatenick", aliases=["stopstopcyclingnick", "stopnickanimate"], description="Stops animating your nickname", usage="stopanimatenick")
 	async def stopanimatenick(self, ctx):
 		self.cycling_nickname = False
@@ -96,6 +180,20 @@ class Fun(commands.Cog):
 		if message.author in self.clowns:
 			await message.add_reaction("🤡")
 			output.log("Clowned " + message.author.name)
+		
+		if message.author in self.mocking:
+			def mock(msg) -> str:
+				mocked = ""
+				i = True
+				for char in msg:
+					if i:
+						mocked += char.upper()
+					else:
+						mocked += char.lower()
+					if char != ' ':
+						i = not i
+				return mocked
+			await message.reply(mock(message.content))
 
 
 

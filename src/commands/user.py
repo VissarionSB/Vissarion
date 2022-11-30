@@ -214,7 +214,7 @@ class User(commands.Cog):
 	
 	@commands.command(name="setcustomstatus", aliases=["cstatus", "customstatus"], description="Sets your custom status to the provided one", usage="setcustomstatus <emoji> <text>")
 	async def setcustomstatus(self, ctx, emoji: str, *, text: str):
-		
+
 		payload = {
 			"custom_status": {
 				"text": text,

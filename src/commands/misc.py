@@ -1,10 +1,9 @@
-import discord, discum, asyncio, os, ast, random, requests, json
+import time
+import discord, discum, os, ast, requests, json
 from discord.ext import commands
-from datetime import datetime
 
 from src.commands.utils.message_builder import builder
 from src.session import client
-from src.config import config
 from src.console.output import output
 from src.globals import global_vars
 
@@ -238,14 +237,14 @@ class Misc(commands.Cog):
 			except:
 				pass
 
-		output.log(f"Purged {amount} messages on {ctx.channel} in {gtx.guild.name}")
+		output.log(f"Purged {amount} messages on {ctx.channel} in {ctx.guild.name}")
 
 
 	@commands.command(name="purge", aliases=['prune'], description="Deletes a specified amount of messages", usage="purge <amount>")
 	@commands.has_permissions(manage_messages=True)
 	async def purge(self, ctx, amount: int):
 		await ctx.channel.purge(limit=amount)
-		output.log(f"Purged {amount} messages on {ctx.channel} in {gtx.guild.name}")
+		output.log(f"Purged {amount} messages on {ctx.channel} in {ctx.guild.name}")
 
 
 	
@@ -312,7 +311,7 @@ class Misc(commands.Cog):
 		exec(compile(parsed, filename="<ast>", mode="exec"), env)
 	
 		result = (await eval(f"{fn_name}()", env))
-		await ctx.send(result)
+		await ctx.send(result, delete_after=client.delete_after)
 
 		#https://gist.github.com/simmsb/2c3c265813121492655bc95aa54da6b9
 	

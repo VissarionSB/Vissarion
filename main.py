@@ -19,6 +19,9 @@ bot = commands.Bot(command_prefix=config.read()['commands']['prefix'], self_bot=
 bot.remove_command("help")
 
 
+
+
+
 def warn(*args, **kwargs):
 	pass
 
@@ -81,7 +84,7 @@ async def on_connect():
 	
 	output.clear()
 	output.print_banner("Connected", str(bot.user), str(bot.command_prefix))
-
+	output.title("Vissarion")
 	bot.loop.create_task(sessions_manager.check_sessions())
 	output.log_sessions("Initialized the session manager")
 

@@ -1,8 +1,6 @@
-import discord, asyncio, requests
+import requests
 from discord.ext import commands
 
-from src.session import client
-from src.config import config
 from src.console.output import output
 from src.discord_utils import discord_utils
 
@@ -20,7 +18,7 @@ class Spotify(commands.Cog):
 		return { "Authorization": "Bearer " + token }
 
 
-	@commands.command(name="unpause", aliases=[], description="Unpauses the player", usage="unpause")
+	@commands.command(name="unpause", aliases=["resume"], description="Unpauses the player", usage="unpause")
 	async def unpause(self, ctx):
 
 		spotify_token = discord_utils.get_spotify_access_token()
@@ -116,8 +114,9 @@ class Spotify(commands.Cog):
 		r = requests.put(self.player_prefix + "volume", headers=Spotify._get_headers(spotify_token), params={"volume_percent": volume})
 		
 
-	@commands.command(name="seek", aliases=[], description="Seeks to a position in the current song", usage="seek <position>")
+	@commands.command(name="seek", aliases=[], description="Seeks to a position in the current song (in seconds)", usage="seek <position>")
 	async def seek(self, ctx, position: int):
+		secs = position * 1000
 
 		spotify_token = discord_utils.get_spotify_access_token()
 
@@ -125,7 +124,7 @@ class Spotify(commands.Cog):
 			output.error("SPOTIFY <~ Invalid access token. Please check if your spotify account is linked to your discord account")
 			return
 
-		r = requests.put(self.player_prefix + "seek", headers=Spotify._get_headers(spotify_token), data=data, params={"position_ms": position})
+		r = requests.put(self.player_prefix + "seek", headers=Spotify._get_headers(spotify_token), params={"position_ms": secs})
 
 
 	@commands.command(name="play", aliases=[], description="Plays a song", usage="play <song>")
@@ -133,12 +132,14 @@ class Spotify(commands.Cog):
 
 		spotify_token = discord_utils.get_spotify_access_token()
 
+
 		if spotify_token == None:
 			output.error("SPOTIFY <~ Invalid access token. Please check if your spotify account is linked to your discord account")
 			return
 
 		search = requests.get("https://api.spotify.com/v1/search", headers=Spotify._get_headers(spotify_token), params={"q": song, "type": "track"})
 		search = search.json()
+
 
 		if search["tracks"]["items"][0] == None:
 			output.error("SPOTIFY <~ No songs found")

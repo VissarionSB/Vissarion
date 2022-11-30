@@ -1,7 +1,6 @@
 import discord
 from discord.ext import commands
 
-from src.session import client
 from src.config import config
 from src.console.output import output
 
@@ -11,13 +10,13 @@ class Settings(commands.Cog):
 	def __init__(self, bot):
 		self.bot = bot
 
-	@commands.command(name="setcommandmode", aliases=["commandmode", "cmode"], description="Changes the cpmmand mode to the selected one", usage="setcommandmode <mode>")
-	async def setcommandmode(self, ctx, mode: str):
+	@commands.command(name="setmessagemode", aliases=["messagemode", "mmode"], description="Changes the message mode to the selected one", usage="setmessagemode <mode>")
+	async def setmessagemode(self, ctx, mode: str):
 		modes = ['embed', 'ansi']
 
 		if mode in modes:
 			config.save_key("commands", mode, subkey="command_mode")
-			output.log("Command mode set to " + mode)
+			output.log("Message mode set to " + mode)
 		else:
 			output.error("Invalid mode. Valid modes <~ ", separated_text="embed, ansi")
 
@@ -33,7 +32,9 @@ class Settings(commands.Cog):
 
 	@commands.command(name="prefix", aliases=["setprefix"], description="Changes the bot's prefix", usage="prefix <prefix>")
 	async def prefix(self, ctx, prefix: str):
-		config.save_key("bot", prefix, subkey="prefix")
+		config.save_key("commands", prefix, subkey="prefix")
+		self.bot.command_prefix = prefix
+		output.refresh(str(self.bot.user), str(self.bot.command_prefix))
 		output.log("Prefix set to " + prefix)
 
 

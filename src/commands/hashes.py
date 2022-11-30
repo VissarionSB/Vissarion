@@ -3,6 +3,8 @@ from discord.ext import commands
 
 from src.commands.utils.message_builder import builder
 from src.session import client
+from argon2 import PasswordHasher
+ph = PasswordHasher()
 
 class Hashes(commands.Cog):
 	"""Contains commands for hashing text with some basic algorithms from the hashlib library."""
@@ -258,7 +260,45 @@ class Hashes(commands.Cog):
 		<field>
 			Result: 
 			<content>
-				result_msg
+				{result_msg}
+			</content>
+		</field>
+		"""
+		await ctx.send(builder.message(str(ctx.command.name), message), delete_after=client.delete_after)
+	
+	@commands.command(name="argon2hash", aliases=["argon2-hash"], description="Hashes a string using Argon2", usage="argon2hash <string>")
+	async def argon2hash(self, ctx, *, string: str):
+
+		encrypted_string = ph.hash(string)
+
+		message = f"""
+		<field>
+			Encrypted string
+			<content>
+				{encrypted_string}
+			</content>
+		</field>
+		"""
+
+		await ctx.send(builder.message(str(ctx.command.name), message), delete_after=client.delete_after)
+
+
+	@commands.command(name="argon2check", aliases=["argon2-check"], description="Validates a Argon2 hash with a suggested string", usage="argon2check <suggested_string> <hash>")
+	async def argoncheck(self, ctx, first_hash: str, second_hash: str):
+
+		result = ph.verify(second_hash, first_hash)
+
+		match(result):
+			case True:
+				result = "The hashes match"
+			case False:
+				result = "The hashes do not match"
+
+		message = f"""
+		<field>
+			Result: 
+			<content>
+				{result}
 			</content>
 		</field>
 		"""
