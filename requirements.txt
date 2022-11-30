@@ -5,4 +5,3 @@ bcrypt
 requests
 discord_rpc.py
 ua_parser
-argon2-cffi
