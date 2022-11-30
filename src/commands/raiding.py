@@ -1,21 +1,18 @@
-import discord, asyncio, os, discum
+import asyncio, discum
 from discord.ext import commands
-from datetime import datetime
 
-from src.commands.utils.message_builder import builder
 from src.session import client
-from src.config import config
 from src.console.output import output
 
 class Raiding(commands.Cog):
-	"""Contains some uncategorized commands."""
+	"""Contains 'malicious' commands related towards raiding."""
 
 	def __init__(self, bot):
 		self.bot = bot
 
 	#automod's default mention limit is 20 and most of the servers are apparently too lazy to change it
 	@commands.command(name="massping", aliases=["massmention"], description="Masspings the whole server", usage="massping <amount> (delay) (delete_after) (use_bypass) (bypass_limit)")
-	async def massping(self, ctx, amount: int=1, delay: int=0, delete_after: int=0, bypass: bool=False, bypass_limit: int=20):
+	async def massping(self, ctx, amount: int=1, delay: int=0, delete_after: int=0, bypass: bool=False, bypass_limit: int=19):
 		
 
 		discum_client = discum.Client(token=client.token, log=False, user_agent=client.get_random_useragent())

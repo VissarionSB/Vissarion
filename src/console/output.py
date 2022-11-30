@@ -16,7 +16,12 @@ class output:
 				os.system("clear")
 			case "win32":
 				os.system("cls")	
-
+	
+	def title(title):
+		"""Sets the console's title"""
+		match(sys.platform):
+			case "win32":
+				os.system("title " + title)
 
 	def get_time():
 		"""Returns the current time."""
@@ -28,7 +33,7 @@ class output:
 		print(f"[{ui.convert('$')}] | {ui.convert(output.get_time())} | Command used: {ui.convert(string)}")
 
 
-	def log(string: str):
+	def log(string: str, category=None):
 		"""Prints a log to the console."""
 		print(f"[{ui.convert('$')}] | {ui.convert(output.get_time())} | {string}")
 
@@ -44,12 +49,17 @@ class output:
 		"""Prints session logs to the console."""
 		print(f"[{ui.convert('>')}] | {ui.convert(output.get_time())} | {ui.convert('SESSIONS')} | {string}")
 
+	
+
 
 	def c_input(string: str):
 		"""Gets input from the console."""
 		c = input(f"[{ui.convert('/')}] | {ui.convert(output.get_time())} | {string}")
 		return c
 
+	def success(string: str, separated_text: str = None):
+		"""Prints a success to the console."""
+		print(f"[{ui.convert('+')}] | {ui.convert(output.get_time())} | {string} {ui.convert(separated_text) if separated_text else ''}")
 
 	def error(string: str, separated_text: str = None):
 		"""Prints an error to the console."""

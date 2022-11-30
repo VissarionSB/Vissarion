@@ -258,11 +258,12 @@ class Hashes(commands.Cog):
 		<field>
 			Result: 
 			<content>
-				result_msg
+				{result_msg}
 			</content>
 		</field>
 		"""
 		await ctx.send(builder.message(str(ctx.command.name), message), delete_after=client.delete_after)
+	), delete_after=client.delete_after)
 
 	
 def setup(bot):

@@ -51,7 +51,7 @@ class client:
 					'small_image_key': config.read()["rich_presence"]['small_image'],
 					'small_image_text': config.read()["rich_presence"]['small_text']
 				})
-				for i in range(3):
+				for _ in range(3):
 					time.sleep(1)
 					discord_rpc.update_connection()
 					discord_rpc.run_callbacks()
