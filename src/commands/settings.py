@@ -91,30 +91,30 @@ class Settings(commands.Cog):
 			output.error("Invalid setting. Valid settings <~ ", separated_text="color, title, description, footer, thumbnail, image, author")
 
 
-	@commands.command(name="setsessionsmanager", aliases=["ssm"], description="Changes the sessions manager", usage="setsessionsmanager <setting> <value>")
-	async def setsessionsmanager(self, ctx, setting: str, value: str):
+	@commands.command(name="setsessionmanager", aliases=["ssm"], description="Changes the session manager", usage="setsessionmanager <setting> <value>")
+	async def setsessionmanager(self, ctx, setting: str, value: str):
 		
 		settings = ['operating_systems', 'platforms', 'locations']
 	
 		if setting in settings:
 			data = config.read()
-			data['sessions_manager'][setting].append(value)
+			data['session_manager'][setting].append(value)
 
 			config.save(data)
-			output.log(f"{value} has been added to {setting} in the sessions manager's whitelist")
+			output.log(f"{value} has been added to {setting} in the session manager's whitelist")
 		else:
 
 			output.log("Invalid setting. Valid settings <~ ", separated_text="operating_systems, platforms, locations")
 	
 
-	@commands.command(name="sessionmanager", aliases=["sm"], description="Toggles the sessions manager", usage="sessionmanager")
+	@commands.command(name="sessionmanager", aliases=["sm"], description="Toggles the session manager", usage="sessionmanager")
 	async def sessionmanager(self, ctx):
 
 		data = config.read()
-		data["sessions_manager"]["enabled"] = not config["sessions_manager"]["enabled"]
+		data["session_manager"]["enabled"] = not config["session_manager"]["enabled"]
 		config.save(data)
 
-		output.log("Sessions manager has been " + ("enabled" if data["sessions_manager"]["enabled"] else "disabled"))
+		output.log("Session manager has been " + ("enabled" if data["session_manager"]["enabled"] else "disabled"))
 	
 
 	@commands.command(name="setstartupstate", aliases=["startupstate"], description="Changes the startup state", usage="setstartupstate <setting> <value>")

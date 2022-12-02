@@ -50,7 +50,7 @@ class config_image:
             "x-property": "property-here"
         },
 
-        "sessions_manager": {
+        "session_manager": {
             "enabled": False,
             "operating_systems": [],
             "platforms": [],

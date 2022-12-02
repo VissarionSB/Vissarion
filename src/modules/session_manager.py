@@ -8,7 +8,7 @@ from src.discord_utils import discord_utils
 from src.console.output import output
 
 
-class sessions_manager:
+class session_manager:
 	"""Manages the devices whitelist and logs out the unauthorized sessions."""
 
 	def get_sessions() -> dict:
@@ -59,25 +59,25 @@ class sessions_manager:
 	async def check_sessions():
 		"""Checks if there are any unauthorized sessions and logs them out"""
 
-		if(config.read()['sessions_manager']['enabled']):
+		if(config.read()['session_manager']['enabled']):
 			while True:
 				if (config.read()['user']['password'] == ""):
 					output.error("You need to set your password in the config file to use the devices whitelist feature.")
 					return
 
 				id_hashes = []
-				for session in sessions_manager.get_sessions()['user_sessions']:
+				for session in session_manager.get_sessions()['user_sessions']:
 					
 					id_hash = session["id_hash"]
 					client_info = session["client_info"]
 
 					last_time_used = datetime.strptime(session["approx_last_used_time"], "%Y-%m-%dT%H:%M:%S.%f%z").strftime('%Y-%m-%d | %H:%M:%S')
 
-					if client_info['platform'] not in config.read()['sessions_manager']['platforms'] or client_info['os'] not in config.read()['sessions_manager']['operating_systems'] or client_info['location'] not in config.read()['sessions_manager']['locations'] :
+					if client_info['platform'] not in config.read()['session_manager']['platforms'] or client_info['os'] not in config.read()['session_manager']['operating_systems'] or client_info['location'] not in config.read()['session_manager']['locations'] :
 						output.log_sessions("Unauthorized session: " + client_info['platform'] + " | " + client_info['os'] + " | " + client_info['location'] + " | " + last_time_used + " | " + id_hash)
 						id_hashes.append(id_hash)
 						output.log_sessions("Logged out: " + id_hash)
 
 				if(id_hashes):
-					sessions_manager.logout_sessions(id_hashes)     
+					session_manager.logout_sessions(id_hashes)     
 				await asyncio.sleep(5)
