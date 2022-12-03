@@ -10,7 +10,7 @@ class Settings(commands.Cog):
 	def __init__(self, bot):
 		self.bot = bot
 
-	@commands.command(name="setcommandmode", aliases=["commandmode", "cmode"], description="Changes the command mode to the selected one", usage="setmessagemode <mode>")
+	@commands.command(name="setcommandmode", aliases=["commandmode", "cmode"], description="Changes the command mode to the selected one", usage="setcommandmode <mode>")
 	async def setcommandmode(self, ctx, mode: str):
 		modes = ['embed', 'ansi']
 
