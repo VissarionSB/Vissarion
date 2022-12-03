@@ -55,7 +55,7 @@ class client:
 					time.sleep(1)
 					discord_rpc.update_connection()
 					discord_rpc.run_callbacks()
-				output.log("Initialized rich presence")
+				output.log("Initialized the rich presence")
 			except:
 				pass
 

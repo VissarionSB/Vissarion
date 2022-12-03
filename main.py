@@ -6,7 +6,7 @@ config.init()
 
 from src.session import client
 from src.console.output import output
-from src.modules.sessions_manager import sessions_manager
+from src.modules.session_manager import session_manager
 
 
 #hide le cursor
@@ -85,7 +85,7 @@ async def on_connect():
 	output.clear()
 	output.print_banner("Connected", str(bot.user), str(bot.command_prefix))
 	output.title("Vissarion")
-	bot.loop.create_task(sessions_manager.check_sessions())
+	bot.loop.create_task(session_manager.check_sessions())
 	output.log_sessions("Initialized the session manager")
 
 	client.start_rpc()
