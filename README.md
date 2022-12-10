@@ -1,7 +1,7 @@
 <p align="center"><img src = "https://vaul.xyz/vissarion_logo.png" height = "150" width = "150"/>  </p>
 <h2 align="center">Vissarion</h2>
-<p align="center">the least handicapped open-source discord selfbot</p>
-
+<p align="center">The least handicapped open-source discord selfbot</p>
+<p align="center">Join us on <a href="https://discord.gg/696CMDNHM2">discord!</a></p>
 <p align="center">
   <a href="https://github.com/VissarionSB/Vissarion/issues">
     <img alt="Issues" src="https://img.shields.io/github/issues/VissarionSB/Vissarion?color=0088ff" />
