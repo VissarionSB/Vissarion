@@ -1,11 +1,13 @@
-import time
-import discord, discum, os, ast, requests, json
+import discord, discord_rpc, discum, os, ast, requests, json, time
 from discord.ext import commands
 
 from src.commands.utils.message_builder import builder
 from src.session import client
 from src.console.output import output
 from src.globals import global_vars
+from src.config import config
+
+
 
 class Misc(commands.Cog):
 	"""Contains some uncategorized commands."""
@@ -150,7 +152,6 @@ class Misc(commands.Cog):
 		await ctx.send(builder.message(str(ctx.command.name), message), delete_after=client.delete_after)
 
 
-	
 	@commands.command(name="avatar", description="Shows a user's avatar", usage="avatar <user>")
 	async def avatar(self, ctx, user: discord.Member=None):
 		
@@ -167,7 +168,6 @@ class Misc(commands.Cog):
 		except:
 			output.log(f"Invalid webhook")
 			return
-
 
 		message = f"""
 <field>
@@ -247,7 +247,6 @@ class Misc(commands.Cog):
 		output.log(f"Purged {amount} messages on {ctx.channel} in {ctx.guild.name}")
 
 
-	
 	@commands.command(name="parse", description="Parses a message", usage="parse <message>")
 	async def parse(self, ctx, *, message):
 		await ctx.send(builder.message(str(ctx.command.name), message), delete_after=client.delete_after)
@@ -315,6 +314,7 @@ class Misc(commands.Cog):
 
 		#https://gist.github.com/simmsb/2c3c265813121492655bc95aa54da6b9
 	
+
 	@commands.command(name="reload", description="Reloads a cog", usage="reload <cog>")
 	async def reload(self, ctx, cog):
 		try:
@@ -447,7 +447,22 @@ class Misc(commands.Cog):
 		with open(os.path.expanduser(f"{global_vars.user_info['config_path']}/backups/" + name + "/backup.json"), "w") as f:
 			f.write(json.dumps(data, indent=4))
 			output.log("Saved the backup to " + os.path.expanduser(f"{global_vars.user_info['config_path']}/backups/" + name + "/backup.json"))
-			
-			
+	
+
+	@commands.command(name="updaterpc", description="Updates the rpc", usage="updaterpc")
+	async def updaterpc(self, ctx):
+		settings = config.read()['rich_presence']
+		discord_rpc.update_presence(**{
+			'details': settings['details'],
+			'state': settings['state'],
+			'start_timestamp': time.time(),
+			'large_image_key': settings['large_image'],
+			'large_image_text': settings['large_text'],
+			'small_image_key': settings['small_image'],
+			'small_image_text': settings['small_text'],
+		})
+
+
+
 def setup(bot):
 	bot.add_cog(Misc(bot))

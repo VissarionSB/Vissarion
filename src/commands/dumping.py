@@ -3,9 +3,10 @@ from discord.ext import commands
 from datetime import datetime
 
 from src.session import client
-from src.config import config
 from src.console.output import output
 from src.globals import global_vars
+
+
 
 class Dumping(commands.Cog):
 	"""Contains commands that are used to dump stuff."""
@@ -118,6 +119,8 @@ class Dumping(commands.Cog):
 
 		open(f"{global_vars.user_info['config_path']}/dumps/" + str(guild.id) + "/members.txt", "w").write(content)
 		output.log("Dumped members from guild " + str(guild.id))
+
+
 
 def setup(bot):
 	bot.add_cog(Dumping(bot))

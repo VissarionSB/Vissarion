@@ -4,11 +4,14 @@ from discord.ext import commands
 from src.config import config
 from src.console.output import output
 
+
+
 class Settings(commands.Cog):
 	"""Contains commands that are used to change the bot's settings."""
 
 	def __init__(self, bot):
 		self.bot = bot
+
 
 	@commands.command(name="setcommandmode", aliases=["commandmode", "cmode"], description="Changes the command mode to the selected one", usage="setcommandmode <mode>")
 	async def setcommandmode(self, ctx, mode: str):
@@ -157,8 +160,6 @@ class Settings(commands.Cog):
 		output.log("Startup state has been " + ("enabled" if data["startup_state"]["enabled"] else "disabled"))
 
 	
-
-
 
 def setup(bot):
 	bot.add_cog(Settings(bot))

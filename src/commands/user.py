@@ -5,6 +5,8 @@ from src.session import client
 from src.console.output import output
 from src.config import config
 
+
+
 class User(commands.Cog):
 	"""Contains commands that are used to manipulate your user account."""
 
@@ -261,6 +263,7 @@ class User(commands.Cog):
 	@commands.command(name="clearnickname", aliases=["cleannickname", "clearnick", "cleannick"], description="Clears your nickname", usage="clearnickname")
 	async def clearnickname(self, ctx):
 		await ctx.message.author.edit(nick=None)
+
 
 
 def setup(bot):

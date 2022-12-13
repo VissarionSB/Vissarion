@@ -1,9 +1,9 @@
-import discord, asyncio, requests, io, aiohttp, string, random, base64
+import discord, asyncio, requests, aiohttp, string, random, base64
 from discord.ext import commands
 
-from src.session import client
-from src.config import config
 from src.console.output import output
+
+
 
 class Fun(commands.Cog):
 	"""Contains commands that are used for fun or to troll users."""
@@ -15,7 +15,6 @@ class Fun(commands.Cog):
 		self.cycling_nickname = False
 	
 
-
 	@commands.command(name="clown", aliases=["clownify"], description="Automatically adds a clown emoji to the user's messages", usage="clown <user>")
 	async def clown(self, ctx, user: discord.Member):
 
@@ -24,9 +23,8 @@ class Fun(commands.Cog):
 			return
 
 		self.clowns.append(user)
-
-
 		output.log("Added " + user.name + " to the clown list")
+
 
 	@commands.command(name="unclown", aliases=["unclownify"], description="Removes the user from the clown list", usage="unclown <user>")
 	async def unclown(self, ctx, user: discord.Member):
@@ -45,8 +43,8 @@ class Fun(commands.Cog):
 			return
 
 		self.mocking.append(user)
-
 		output.log("Started mocking " + user.name)
+
 
 	@commands.command(name="unmock", aliases=[], description="Stops mocking a user", usage="unmock <user>")
 	async def unmock(self, ctx, user: discord.Member):
@@ -56,7 +54,6 @@ class Fun(commands.Cog):
 			output.log("Stopped mocking " + user.name)
 		else:
 			output.error("User is not being mocked")
-
 
 
 	@commands.command(name="minesweeper", aliases=["mines"], description="Generates a minesweeper board", usage="minesweeper <width> <height> <mines>")
@@ -118,9 +115,6 @@ class Fun(commands.Cog):
 		await ctx.send(board_string)
 
 
-
-
-
 	@commands.command(name="animatenick", aliases=["cyclenick", "nickanimate"], description="Animates your nickname", usage="animatenick <nickname>")
 	async def animatenick(self, ctx, nickname: str):
 		if nickname == "":
@@ -172,7 +166,6 @@ class Fun(commands.Cog):
 		
 		await ctx.send(f"{user.name}'s account token is `{b_id}.*****.***************************`")
 
-	
 
 	@commands.Cog.listener()
 	async def on_message(self, message):
@@ -194,7 +187,6 @@ class Fun(commands.Cog):
 						i = not i
 				return mocked
 			await message.reply(mock(message.content))
-
 
 
 def setup(bot):

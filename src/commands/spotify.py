@@ -5,6 +5,7 @@ from src.console.output import output
 from src.discord_utils import discord_utils
 
 
+
 class Spotify(commands.Cog):
 	"""Contains commands that are used to control the spotify player"""
 
@@ -40,6 +41,7 @@ class Spotify(commands.Cog):
 			return
 
 		r = requests.put(self.player_prefix + "pause", headers=Spotify._get_headers(spotify_token))
+
 
 	@commands.command(name="next", aliases=[], description="Skips to the next song", usage="next")
 	async def next(self, ctx):
@@ -162,6 +164,7 @@ class Spotify(commands.Cog):
 		else:
 			output.error("SPOTIFY <~ Failed to play the song")
 			return
+
 
 
 def setup(bot):

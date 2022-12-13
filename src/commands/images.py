@@ -1,8 +1,9 @@
 import discord, requests
 
 from discord.ext import commands
-from src.session import client
 from src.console.output import output
+
+
 
 class Images(commands.Cog):
 	"""Image manipulation commands"""
@@ -10,6 +11,7 @@ class Images(commands.Cog):
 	def __init__(self, bot):
 		self.bot = bot
 		self.image_gen_url = "https://nekobot.xyz/api/imagegen?type="
+
 
 	@commands.command(name="phcomment", aliases=["phc"], description="Sends a pornhub comment with the specified text", usage="phcomment <user> <text>")
 	async def phcomment(self, ctx, user: discord.Member, *, text):
@@ -138,6 +140,7 @@ class Images(commands.Cog):
 
 		else:
 			output.error(f"Error: {r.status_code} {r.reason}")
+
 
 
 def setup(bot):

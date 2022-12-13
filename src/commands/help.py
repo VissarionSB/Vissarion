@@ -3,8 +3,9 @@ from discord.ext import commands
 
 from src.commands.utils.message_builder import builder
 from src.session import client
-from src.config import config
 from src.console.output import output
+
+
 
 class Help(commands.Cog):
 	"""Help menus"""
@@ -17,7 +18,6 @@ class Help(commands.Cog):
 	async def help(self, ctx):
 
 		prefix = client.prefix
-
 		menu = f"""
 <quote><bold>Categories<reset><nl><quote><nl>
 
@@ -322,7 +322,6 @@ class Help(commands.Cog):
 		await ctx.send(builder.message(str(ctx.command.name), menu), delete_after=client.delete_after)
 
 
-
 	@commands.command(name="networking", aliases=[], description="Sends the networking help menu", usage="networking <page>")
 	async def networking(self, ctx, page: int=1):
 
@@ -350,7 +349,6 @@ class Help(commands.Cog):
 <quote><nl>"""
 
 		await ctx.send(builder.message(str(ctx.command.name), menu), delete_after=client.delete_after)
-
 
 
 	@commands.command(name="fun", aliases=[], description="Sends the fun help menu", usage="fun <page>")
@@ -395,7 +393,6 @@ class Help(commands.Cog):
 		await ctx.send(builder.message(str(ctx.command.name), menu), delete_after=client.delete_after)
 
 
-
 	@commands.command(name="exploits", aliases=[], description="Sends the exploits help menu", usage="exploits <page>")
 	async def exploits(self, ctx, page: int=1):
 
@@ -423,7 +420,6 @@ class Help(commands.Cog):
 <quote><nl>"""
 
 		await ctx.send(builder.message(str(ctx.command.name), menu), delete_after=client.delete_after)
-
 
 
 	@commands.command(name="dumping", aliases=[], description="Sends the dumping help menu", usage="dumping <page>")
@@ -491,6 +487,7 @@ class Help(commands.Cog):
 <quote>Page » {page}/{pages}<nl>"""
 
 		await ctx.send(builder.message(str(ctx.command.name), menu), delete_after=client.delete_after)
+
 
 
 def setup(bot):

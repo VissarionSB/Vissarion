@@ -41,15 +41,18 @@ class client:
 
 		if (config.read()["rich_presence"]['enabled'] == True):
 			try:
-				discord_rpc.initialize((config.read()["rich_presence"]['client_id']),	log=False)
+
+				settings = config.read()["rich_presence"]
+
+				discord_rpc.initialize(settings['client_id'],	log=False)
 				discord_rpc.update_presence(**{
-					'details':config.read()["rich_presence"]['details'],
-					'state': config.read()["rich_presence"]['state'],
+					'details': settings['details'],
+					'state': settings['state'],
 					'start_timestamp': time.time(),
-					'large_image_key': config.read()["rich_presence"]['large_image'],
-					'large_image_text': config.read()["rich_presence"]['large_text'],
-					'small_image_key': config.read()["rich_presence"]['small_image'],
-					'small_image_text': config.read()["rich_presence"]['small_text']
+					'large_image_key': settings['large_image'],
+					'large_image_text': settings['large_text'],
+					'small_image_key': settings['small_image'],
+					'small_image_text': settings['small_text'],
 				})
 				for _ in range(3):
 					time.sleep(1)

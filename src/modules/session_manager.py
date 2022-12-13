@@ -4,7 +4,6 @@ from datetime import datetime
 from src.discord_utils import discord_utils
 from src.config import config
 from src.session import client
-from src.discord_utils import discord_utils
 from src.console.output import output
 
 
@@ -14,10 +13,7 @@ class session_manager:
 	def get_sessions() -> dict:
 		"""Gets all of your logged sessions"""
 
-		if not config.read()['useOwnXProperties']['enabled']:
-			x_super_properties = discord_utils.gen_x_super_properties()
-		else:
-			x_super_properties = config.read()['useOwnXProperties']['x-property']
+		x_super_properties = discord_utils.get_x_super_properties()
 
 		headers = {
 			'Authorization': client.token,
@@ -32,11 +28,8 @@ class session_manager:
 	def logout_sessions(id_hashes: list) -> dict:
 		"""Logs you out of all sessions except the whitelisted ones"""
 
-		if not config.read()['useOwnXProperties']['enabled']:
-			x_super_properties = discord_utils.gen_x_super_properties()
-		else:
-			x_super_properties = config.read()['useOwnXProperties']['x-property']
-
+		x_super_properties = discord_utils.get_x_super_properties()
+		
 		headers = {
 			'Authorization': client.token,
 			'User-Agent': client.get_random_useragent(),

@@ -4,6 +4,8 @@ from discord.ext import commands
 from src.session import client
 from src.console.output import output
 
+
+
 class Raiding(commands.Cog):
 	"""Contains 'malicious' commands related towards raiding."""
 
@@ -57,9 +59,8 @@ class Raiding(commands.Cog):
 				except Exception as e:
 					print(e)
 					pass
+				
 
-	
-	
-
+				
 def setup(bot):
 	bot.add_cog(Raiding(bot))

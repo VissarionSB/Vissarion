@@ -6,6 +6,8 @@ from src.config import config
 from src.console.output import output
 from src.commands.utils.message_builder import builder
 
+
+
 class Networking(commands.Cog):
 
 	def __init__(self, bot):

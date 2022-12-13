@@ -30,34 +30,39 @@ class discord_utils:
 		return build_num
 
 
-	def gen_x_super_properties() -> str:
+	def get_x_super_properties() -> str:
 		"""Generates x-super-properties for anti-bot detection"""
 
-		user_agent = client.get_random_useragent()
-		parsed_useragent = ua_parser.user_agent_parser.Parse(user_agent)
-	
-		browser_ver_list = [parsed_useragent["user_agent"]["major"], parsed_useragent["user_agent"]["minor"], parsed_useragent["user_agent"]["patch"]]
-		os_ver_list = [parsed_useragent["os"]["major"], parsed_useragent["os"]["minor"], parsed_useragent["os"]["patch"]]
-		
-		template = {
-			"os": parsed_useragent["os"]["family"],
-			"browser": parsed_useragent["user_agent"]["family"],
-			"device": "",
-			"system_locale": "en-US",
-			"browser_user_agent": parsed_useragent["string"],
-			"browser_version": ".".join(filter(None, browser_ver_list)),
-			"os_version": ".".join(filter(None, os_ver_list)),
-			"referrer": "",
-			"referring_domain": "",
-			"referrer_current": "",
-			"referring_domain_current": "",
-			"release_channel": "stable",
-			"client_build_number": int(discord_utils.get_build_number()),
-			"client_event_source": None
-		}
+		if config.read()['useOwnXProperties']['enabled']:
+			x_super_properties = config.read()['useOwnXProperties']['x-property']
+			
+		else:
+			
+			user_agent = client.get_random_useragent()
+			parsed_useragent = ua_parser.user_agent_parser.Parse(user_agent)
 
-		super_property = base64.b64encode(str(template).encode('utf-8')).decode()
-		return super_property
+			browser_ver_list = [parsed_useragent["user_agent"]["major"], parsed_useragent["user_agent"]["minor"], parsed_useragent["user_agent"]["patch"]]
+			os_ver_list = [parsed_useragent["os"]["major"], parsed_useragent["os"]["minor"], parsed_useragent["os"]["patch"]]
+
+			template = {
+				"os": parsed_useragent["os"]["family"],
+				"browser": parsed_useragent["user_agent"]["family"],
+				"device": "",
+				"system_locale": "en-US",
+				"browser_user_agent": parsed_useragent["string"],
+				"browser_version": ".".join(filter(None, browser_ver_list)),
+				"os_version": ".".join(filter(None, os_ver_list)),
+				"referrer": "",
+				"referring_domain": "",
+				"referrer_current": "",
+				"referring_domain_current": "",
+				"release_channel": "stable",
+				"client_build_number": int(discord_utils.get_build_number()),
+				"client_event_source": None
+			}
+
+			super_property = base64.b64encode(str(template).encode('utf-8')).decode()
+			return super_property
 
 
 	def get_spotify_access_token() -> str:

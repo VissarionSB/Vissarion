@@ -2,17 +2,18 @@ import discord, asyncio, os, requests
 from discord.ext import commands
 from datetime import datetime
 
-from src.session import client
-from src.config import config
 from src.console.output import output
 from src.config import config
 from src.commands.utils.webhook_builder import webhook_builder
+
+
 
 class Events(commands.Cog):
 	"""Logs events from all over da discord"""
 
 	def __init__(self, bot):
 		self.bot = bot
+
 
 	@commands.Cog.listener()
 	async def on_message_delete(self, message):

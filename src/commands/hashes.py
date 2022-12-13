@@ -4,11 +4,14 @@ from discord.ext import commands
 from src.commands.utils.message_builder import builder
 from src.session import client
 
+
+
 class Hashes(commands.Cog):
 	"""Contains commands for hashing text with some basic algorithms from the hashlib library."""
 
 	def __init__(self, bot):
 		self.bot = bot
+
 
 	@commands.command(name="sha1", aliases=["sha-1"], description="Hashes a string using SHA-1", usage="sha1 <string>")
 	async def sha1(self, ctx, *, string: str):
