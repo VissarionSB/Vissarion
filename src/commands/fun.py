@@ -189,5 +189,6 @@ class Fun(commands.Cog):
 			await message.reply(mock(message.content))
 
 
+
 def setup(bot):
 	bot.add_cog(Fun(bot))
