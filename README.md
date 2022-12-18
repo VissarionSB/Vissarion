@@ -34,7 +34,6 @@ If something doesn't work for you, please [open an issue](https://github.com/Vis
 ### Installation
 * `git clone https://github.com/VissarionSB/Vissarion`
 * `cd Vissarion`
-* `pip install -r requirements.txt`
 * `python main.py`
 
 <br/>
