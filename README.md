@@ -23,8 +23,10 @@
 
 <br/>
 
-### Compatibility
-Should run on Windows as well as on Linux.  
+### Requirements
+* Windows / Linux
+* Python 3.10+
+ 
 If something doesn't work for you, please [open an issue](https://github.com/VissarionSB/Vissarion/issues/new).
 
 <br/>
