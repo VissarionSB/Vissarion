@@ -1,7 +1,0 @@
-discord.py-self
-discum
-asyncio
-bcrypt
-requests
-discord_rpc.py
-ua_parser

@@ -1,3 +1,6 @@
+from src.modules.package_manager import package_manager
+package_manager.check()
+
 import discord, os, requests, asyncio, sys
 from discord.ext import commands
 
@@ -17,8 +20,6 @@ if (sys.platform == "linux"):
 """Initializes the bot."""
 bot = commands.Bot(command_prefix=config.read()['commands']['prefix'], self_bot=True, caseinsensitive=True)
 bot.remove_command("help")
-
-
 
 
 

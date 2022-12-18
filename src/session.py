@@ -14,7 +14,10 @@ class client:
 	prefix = config.read()['commands']['prefix']
 	delete_after = config.read()['commands']['delete_after']
 
-
+	def _refresh_prefix():
+		"""Refreshes the prefix variable."""
+		client.prefix = config.read()['commands']['prefix']
+		
 	def _change_token_seq(bot: commands.Bot):
 		"""Changes the token in the config file and restarts the bot."""
 		p_token = output.c_input("Please enter your token: ").replace('"', '')

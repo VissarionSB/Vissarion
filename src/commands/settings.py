@@ -36,7 +36,10 @@ class Settings(commands.Cog):
 	@commands.command(name="prefix", aliases=["setprefix"], description="Changes the bot's prefix", usage="prefix <prefix>")
 	async def prefix(self, ctx, prefix: str):
 		config.save_key("commands", prefix, subkey="prefix")
+		
 		self.bot.command_prefix = prefix
+
+		client._refresh_prefix()
 		output.refresh(str(self.bot.user), str(self.bot.command_prefix))
 		output.log("Prefix set to " + prefix)
 
