@@ -1,7 +1,7 @@
 import os, subprocess
 from src.console.output import output
 
-class package_manager():
+class package_manager:
 
 
     def _install(package: str):
