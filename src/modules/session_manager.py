@@ -25,7 +25,7 @@ class session_manager:
 		return request.json()
 
 
-	def logout_sessions(id_hashes: list) -> dict:
+	def logout_sessions(id_hashes: list):
 		"""Logs you out of all sessions except the whitelisted ones"""
 
 		x_super_properties = discord_utils.get_x_super_properties()
