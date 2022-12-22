@@ -1,5 +1,4 @@
 import os, subprocess
-from src.console.output import output
 
 class package_manager:
 
