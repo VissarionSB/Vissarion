@@ -23,14 +23,13 @@ class package_manager:
         installed_packages = [package.split("==")[0] for package in subprocess.getoutput("pip freeze").splitlines()]
 
         if "discord.py" in installed_packages:
-            output.error("Warning! You are using stock the discord.py package that is supposed to be used for bots. Vissarion uses the discord.py-self fork of it. Uninstalling discord.py...")
             package_manager._uninstall("discord.py")
 
-        
+        print("Checking reqs...")
         for package in packages:
 
             if package not in installed_packages:
-                output.log(f"Installing {package}")
+                
                 match(package):
                     case "discum":
                         package_manager._install("--user --upgrade git+https://github.com/Merubokkusu/Discord-S.C.U.M.git#egg=discum")
@@ -38,4 +37,3 @@ class package_manager:
                     case _:
                         package_manager._install(package)
 
-        output.log("All packages installed")
