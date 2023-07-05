@@ -18,7 +18,7 @@ class package_manager:
     def check():
         """Checks if all the requirements are installed."""
 
-        packages = ["discord.py-self", "discum", "asyncio", "bcrypt", "requests", "discord_rpc.py", "ua_parser"]
+        packages = ["discord.py-self==1.9.2", "discum", "asyncio", "bcrypt", "requests", "discord_rpc.py", "ua_parser"]
         installed_packages = [package.split("==")[0] for package in subprocess.getoutput("pip freeze").splitlines()]
 
         if "discord.py" in installed_packages:
